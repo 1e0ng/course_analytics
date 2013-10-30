@@ -1,81 +1,75 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Course Analytics</title>
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-      
-        <script src="/static/js/jquery-1.10.2.min.js"></script>
+{% extends "base.html" %}
 
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-44084871-1']);
-          _gaq.push(['_trackPageview']);
+{% block content %}
+    {% if elements %}
+    <h4>
+        结果:
+    </h4>
+    <h5>
+        Elements:
+    </h5>
+    <table class="table table-hover table-bordered">
+        <tr>
+            {% for e in elements %}
+            <td>{{e}}</td>
+            {% if loop.index is divisibleby(199) %}
+            </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    <h5>
+        Tuples:
+    </h5>
+    <table class="table table-hover table-bordered">
+        <tr>
+            {% for a in tuples %}
+            <td>{{'%s,%s' % a}}</td>
+            {% if loop.index is divisibleby(199) %}
+            </tr><tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+    <h5>
+        Matrix:
+    </h5>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td>#</td>
+            {% for i in range(1, 20) %}
+            <td>{{i}}</td>
+            {% endfor %}
+        </tr>
+        {% for i in range(1, 20) %}
+        <tr>
+            <td>{{i}}</td>
+            {% for j in range(1, 20) %}
+            <td>{{matrix[(i, j)]}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
 
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        </script>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="navbar navbar-inverse" role="navigation">
-                <div class="navbar-header">
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Enjoy Study</a>
-                </div>
+    <hr>
+    {% endif %}
+    <h4>
+        使用方法：
+    </h4>
+    <ol>
+        <li>
+        确保xls文件里包含一个名为'源编码'的sheet, 并把所有课堂分类数据写在这个sheet 中。
+        </li>
+        <li>
+        点击下面的按钮，提交文件，并点击上传。
+        </li>
+    </ol>
 
-                    {% set navigation_bar = [
-                        ('/input_check', 'input_check', '录入检查'),
-                        ('/books', 'books', '书籍解析'),
-                        ('/correct', 'correct', '解析解错'),
-                        ('/parse_result', 'parse_result', '解析结果'),
-                        ('/spell', 'spell', '排版排错'),
-                        ('/ts/books', 'ts_book', '书籍排版'),
-                        ('/render', 'render', '渲染引擎'),
-                        ('/statistics', 'statistics', '统计报告'),
-                    ] -%}
-                    {% set active_page = active_page|default('parse_result') -%}
-                <div class="nav-collapse collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                    {% for href, id, caption in navigation_bar %}
-                    {% if has_permission(href, current_user['role']) %}
-                        <li{% if id == active_page %} class="active"{% endif
-                        %}><a href="{{ href|e }}">{{ caption|e }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/worklist">{{current_user['email']}}</a></li>
-                        <li>
-                        <a href='http://i.enjoystudy.com/auth/logout?callback=http://x.enjoystudy.com' id='logout'>退出</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="content">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
-        <footer class="footer">
-        <div class="container">
-            <hr />
-            <p class="text-center">
-            &copy; Enjoy Study, 2013
-            </p>
-        </div>
-        </footer>
-        <script src="/static/js/bootstrap.min.js"></script>
-        <script src="/static/js/main.js"></script>
-        {% block js %}
-        {% endblock %}
-    </body>
-</html>
+<form role="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="xls_file">选择文件:</label>
+        <input type="file" id="xls_file" name="xls_file" class="form-control form-inline" />
+    </div>
+    <button type="submit" name="submit" class="btn btn-default">提交</button>
+</form>
+{% endblock %}
