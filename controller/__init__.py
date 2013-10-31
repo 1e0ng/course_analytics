@@ -37,7 +37,7 @@ class MainHandler(RequestHandler):
         book = xlrd.open_workbook(path)
         sheet = book.sheet_by_name(u'原编码')
         if not sheet:
-            self.write(u'没有找到名字为“源编码”的sheet。')
+            self.write(u'没有找到名字为“原编码”的sheet。')
             return
 
         data = []

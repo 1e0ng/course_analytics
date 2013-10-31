@@ -3,6 +3,7 @@
 *.swp
 .~lock*
 tmp
+*.log
 
 # C extensions
 *.so
