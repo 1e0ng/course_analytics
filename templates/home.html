@@ -53,23 +53,27 @@
 
     <hr>
     {% endif %}
-    <h4>
-        使用方法：
-    </h4>
-    <ol>
-        <li>
-        确保xls文件里包含一个名为'原编码'的sheet, 并把所有课堂分类数据写在这个sheet 中。
-        </li>
-        <li>
-        点击下面的按钮，提交xls文件。
-        </li>
-    </ol>
+    <div class="panel panel-success" style="min-height:400px;width:600px;margin:50px auto;padding:30px;">
+        <form role="form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="xls_file"></label>
+                <input type="file" id="xls_file" name="xls_file" class="form-control form-inline" />
+            </div>
+            <button type="submit" name="submit" class="btn btn-success">提交</button>
+        </form>
+        <hr>
+        <h4>
+            使用方法：
+        </h4>
+        <ol>
+            <li>
+            确保xls文件里包含一个名为'原编码'的sheet, 并把所有课堂分类数据写在这个sheet 中。
+            </li>
+            <li>
+            点击下面的按钮，提交xls文件。
+            </li>
+        </ol>
 
-<form role="form" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="xls_file">选择文件:</label>
-        <input type="file" id="xls_file" name="xls_file" class="form-control form-inline" />
+
     </div>
-    <button type="submit" name="submit" class="btn btn-default">提交</button>
-</form>
-{% endblock %}
+    {% endblock %}

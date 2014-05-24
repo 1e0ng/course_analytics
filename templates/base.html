@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Liang Sun (i@liangsun.org)">
         <title>Course Analytics</title>
         <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
       
@@ -20,7 +21,7 @@
           })();
         </script>
     </head>
-    <body>
+    <body style="background:#eeeee8;">
         <div class="container">
             <div class="navbar navbar-inverse" role="navigation">
                 <div class="navbar-header">
@@ -29,11 +30,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Course Analytics</a>
+                    <a class="navbar-brand" href="/">课堂分析</a>
                 </div>
 
                     {% set navigation_bar = [
-                        ('/', 'home', 'Home'),
+                        ('/', 'home', '首页'),
                     ] -%}
                     {% set active_page = active_page|default('home') -%}
                 <div class="nav-collapse collapse navbar-collapse">
@@ -53,8 +54,11 @@
         <footer class="footer">
             <div class="container">
                 <hr />
-                <p class="text-center">
-                Created by <a href="http://liangsun.org">Liang Sun</a>, 2013
+                <p>
+                本网站是<a href="https://liangsun.org" target="_blank">Liang Sun</a>为他的女朋友<a href="http://www.tanghongxiu.com" target="_blank">阿秀</a>设计制作的，原因是不忍心看着自己心爱的女朋友重复做没有必必要的体力劳动 ^ ^ 。 网站的源码在<a href="https://github.com/liangsun/course_analytics" target="_blank">GitHub</a>开源，开源的协议是MIT。
+                </p>
+                <p>
+                Created by <a href="https://liangsun.org" target="_blank">Liang Sun</a>, 2013
                 </p>
             </div>
         </footer>

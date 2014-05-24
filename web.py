@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #fileencoding=utf-8
-
+import os
 import time
 import signal
 import logging
@@ -24,8 +24,10 @@ class JinjaLoader(object):
     def __init__(self,  **kwargs):
         super(JinjaLoader,  self).__init__(**kwargs)
 
+        path = os.path.abspath(os.path.join(__file__, '../templates'))
+
         loader = ChoiceLoader([
-            FileSystemLoader('templates'),
+            FileSystemLoader(path),
             ])
 
         self.env = Environment(loader=loader)
